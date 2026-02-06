@@ -2,30 +2,50 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>My Coolio Bio</title>
+  <title>My Bio</title>
 
   <style>
     body {
       margin: 0;
       min-height: 100vh;
-      background: linear-gradient(135deg, #0a1a3a, #1f4fd8);
+      background: black;
       display: flex;
       justify-content: center;
       align-items: center;
       font-family: Arial, sans-serif;
       color: white;
       overflow: hidden;
+      transition: background 1.5s ease;
+    }
+
+    /* GRADIENT ANIMATION */
+    body.active {
+      background: linear-gradient(135deg, #0a1a3a, #1f4fd8);
+      background-size: 400% 400%;
+      animation: gradientMove 10s ease infinite;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     /* CLICK TO CONTINUE */
     .gate {
       position: fixed;
       inset: 0;
-      background: linear-gradient(135deg, #0a1a3a, #1f4fd8);
+      background: black;
       display: flex;
       justify-content: center;
       align-items: center;
       z-index: 10;
+      transition: opacity 1s ease;
+    }
+
+    .gate.hidden {
+      opacity: 0;
+      pointer-events: none;
     }
 
     .gate button {
@@ -33,7 +53,7 @@
       padding: 20px 40px;
       border-radius: 20px;
       border: none;
-      background: black;
+      background: #111;
       color: white;
       font-weight: bold;
       cursor: pointer;
@@ -45,6 +65,13 @@
       width: 90%;
       max-width: 420px;
       text-align: center;
+      opacity: 0;
+      animation: fadeIn 1.2s ease forwards;
+      animation-delay: 1s;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
     }
 
     h1 {
@@ -91,7 +118,7 @@
 
 <body>
 
-  <!-- CLICK TO CONTINUE SCREEN -->
+  <!-- CLICK TO CONTINUE -->
   <div class="gate" id="gate">
     <button onclick="enterSite()">Click to Continue</button>
   </div>
@@ -100,8 +127,7 @@
   <div class="content" id="content">
     <h1>My Bio</h1>
 
-    <!-- 🔥 SONG IMAGE (THIS IS THE SONG IMAGE SECTION) -->
-    <!-- Replace the image URL with your favorite song image -->
+    <!-- SONG IMAGE -->
     <img
       src="https://image2url.com/r2/default/images/1770415461533-ca0a5f3d-b3d7-4693-83f1-18717e6edbff.png"
       alt="Favorite Song"
@@ -117,9 +143,9 @@
     </div>
 
     <div class="links">
-      <a href="https://discord.gg/luckytag" target="_blank">Join My Games Discord Here.</a>
-      <a href="https://www.tiktok.com/@_.desk?_r=1&_t=ZT-93hpHSoRmmc" target="_blank">Follow My TikTok</a>
-      <a href="https://www.meta.com/experiences/app/9787130994744207/?utm_source=oculus&utm_medium=share&hwsh=VBYXgA8hb3">Download My Game Here!</a>
+      <a href="https://discord.gg/luckytag" target="_blank">Join My Games Discord</a>
+      <a href="https://www.tiktok.com/@_.desk?_r=1&_t=ZT-93hpHSoRmmcK" target="_blank">Follow My Tiktok!</a>
+      <a href="https://www.meta.com/experiences/app/9787130994744207/?utm_source=oculus&utm_medium=share&hwsh=VBYXgA8hb3" target="_blank">Download My Game Here!</a>
     </div>
   </div>
 
@@ -148,7 +174,7 @@
       });
     }
 
-    function fadeIn() {
+    function fadeInMusic() {
       fadeInterval = setInterval(() => {
         if (volume >= 50) {
           clearInterval(fadeInterval);
@@ -159,26 +185,16 @@
       }, 80);
     }
 
-    function fadeOut() {
-      fadeInterval = setInterval(() => {
-        if (volume <= 0) {
-          clearInterval(fadeInterval);
-          player.stopVideo();
-        } else {
-          volume--;
-          player.setVolume(volume);
-        }
-      }, 50);
-    }
-
     function enterSite() {
-      document.getElementById("gate").style.display = "none";
-      document.getElementById("content").style.display = "block";
-      player.playVideo();
-      fadeIn();
-    }
+      document.body.classList.add("active");
+      document.getElementById("gate").classList.add("hidden");
 
-    window.addEventListener("beforeunload", fadeOut);
+      setTimeout(() => {
+        document.getElementById("content").style.display = "block";
+        player.playVideo();
+        fadeInMusic();
+      }, 1000);
+    }
   </script>
 
 </body>
