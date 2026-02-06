@@ -157,50 +157,6 @@
     <button onclick="enterSite()">Click to Continue</button>
   </div>
 
-  /* Canvas for dust particles */
-  #dust {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-  }
-
-  .gate {
-    position: fixed;
-    inset: 0;
-    background: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10;
-  }
-
-  .gate button {
-    font-size: 1.4rem;
-    padding: 18px 32px;
-    border-radius: 20px;
-    border: none;
-    background: #111;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-  }
-
-  .content {
-    display: none;
-    width: 92%;
-    max-width: 460px;
-    text-align: center;
-    opacity: 0;
-    animation: fadeIn 1.2s ease forwards;
-    animation-delay: 0.6s;
-    position: relative;
-    z-index: 1; /* Above dust */
-  }
-
-  @keyframes fadeIn {
-    to { opacity: 1; }
-  }
-
   <!-- MAIN CONTENT -->
   <div class="content" id="content">
     <h1>My Bio</h1>
