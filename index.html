@@ -2,10 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-
-  <!-- ✅ IMPORTANT FOR MOBILE -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>My Coolo Bio</title>
 
   <style>
@@ -35,7 +32,6 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* 🌫️ DUST CANVAS */
     #dust {
       position: fixed;
       inset: 0;
@@ -43,7 +39,6 @@
       pointer-events: none;
     }
 
-    /* CLICK TO CONTINUE */
     .gate {
       position: fixed;
       inset: 0;
@@ -64,7 +59,6 @@
       font-weight: bold;
     }
 
-    /* MAIN CONTENT */
     .content {
       display: none;
       width: 92%;
@@ -77,16 +71,10 @@
       z-index: 1;
     }
 
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
+    @keyframes fadeIn { to { opacity: 1; } }
 
-    h1 {
-      font-size: 1.8rem;
-      margin-bottom: 12px;
-    }
+    h1 { font-size: 1.8rem; margin-bottom: 12px; }
 
-    /* SONG IMAGE */
     .song-img {
       width: 100%;
       border-radius: 18px;
@@ -94,8 +82,7 @@
       cursor: pointer;
     }
 
-    .song-continue,
-    .platforms {
+    .song-continue, .platforms {
       display: none;
       background: black;
       padding: 16px;
@@ -127,12 +114,7 @@
       line-height: 1.55;
     }
 
-    .section-title {
-      text-align: left;
-      font-weight: bold;
-      margin-bottom: 6px;
-      font-size: 0.95rem;
-    }
+    .section-title { text-align: left; font-weight: bold; margin-bottom: 6px; font-size: 0.95rem; }
 
     .friends-box {
       background: black;
@@ -161,10 +143,7 @@
     @media (max-width: 480px) {
       h1 { font-size: 2rem; }
       .bio-card { font-size: 1rem; }
-      .gate button {
-        font-size: 1.5rem;
-        padding: 20px 36px;
-      }
+      .gate button { font-size: 1.5rem; padding: 20px 36px; }
     }
   </style>
 </head>
@@ -232,13 +211,13 @@ function onYouTubeIframeAPIReady() {
       loop: 1,
       playlist: 'LwIvSZ4DT4E',
       controls: 0,
-      mute: 1,          // 🔥 mobile-safe
+      mute: 1,
       playsinline: 1
     },
     events: {
       onReady: () => {
-        player.mute();       // mute first
-        player.setVolume(0); // start at 0 volume
+        player.mute();
+        player.setVolume(0);
       }
     }
   });
@@ -263,12 +242,8 @@ function enterSite() {
   }, 600);
 }
 
-function showSongContinue() {
-  document.getElementById("songContinue").style.display = "block";
-}
-function showPlatforms() {
-  document.getElementById("platforms").style.display = "block";
-}
+function showSongContinue() { document.getElementById("songContinue").style.display = "block"; }
+function showPlatforms() { document.getElementById("platforms").style.display = "block"; }
 
 /* 🌫️ DUST ANIMATION */
 const canvas = document.getElementById("dust");
