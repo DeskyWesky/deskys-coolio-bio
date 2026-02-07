@@ -127,7 +127,6 @@
       line-height: 1.55;
     }
 
-    /* 👥 FRIENDS SECTION */
     .section-title {
       text-align: left;
       font-weight: bold;
@@ -159,7 +158,6 @@
 
     #player { display: none; }
 
-    /* 📱 EXTRA MOBILE BOOST */
     @media (max-width: 480px) {
       h1 { font-size: 2rem; }
       .bio-card { font-size: 1rem; }
@@ -175,12 +173,10 @@
 
 <canvas id="dust"></canvas>
 
-<!-- CLICK TO CONTINUE -->
 <div class="gate" id="gate">
   <button onclick="enterSite()">Click to Continue</button>
 </div>
 
-<!-- MAIN CONTENT -->
 <div class="content" id="content">
   <h1>My Bio</h1>
 
@@ -196,19 +192,17 @@
 
   <div class="platforms" id="platforms">
     <strong>What Platform Would You Like To Hear This From?</strong>
-    <a href="https://open.spotify.com/track/6QHLeCJzFSENsGjkuYMCV7" target="_blank">Click Here To Listen On Spotify</a>
-    <a href="https://youtu.be/LwIvSZ4DT4E" target="_blank">Click Here To Listen On YouTube</a>
+    <a href="https://open.spotify.com/track/6QHLeCJzFSENsGjkuYMCV7" target="_blank">🎧 Spotify</a>
+    <a href="https://youtu.be/LwIvSZ4DT4E" target="_blank">▶ YouTube</a>
   </div>
 
   <div class="bio-card">
     <strong>Hello!</strong><br><br>
-    ~ I’m Desk Or Desky Wesky And I Own A Game Called LuckyTag.
-    I Also Own Canopy Vr!! Now I Do Wanna Say That I Am A Developer
-    But Not For Free. Meaning I Won’t Help People Unless They Are
-    My Friends. And I Am A Apk Method Veteran: 3 Years Of Apk Method
+    ~ Apk Method Dev.
+    ~ Cyber Secuirty.
+    ~ I Have Like 0 Day 1s.
   </div>
 
-  <!-- 👥 FRIENDS -->
   <div class="section-title">friends</div>
   <div class="friends-box">
     L1rson, Dre1mer, G4, Spool.
@@ -216,7 +210,7 @@
 
   <div class="links">
     <a href="https://discord.gg/luckytag" target="_blank">Join My Games Discord</a>
-    <a href="https://www.tiktok.com/@_.desk" target="_blank">Follow My TikTok</a>
+    <a href="https://www.tiktok.com/@_.desk" target="_blank">Make Sure To Follow TikTok</a>
     <a href="https://www.meta.com/experiences/app/9787130994744207" target="_blank">Download My Game</a>
   </div>
 </div>
@@ -260,7 +254,7 @@ function showPlatforms() {
   document.getElementById("platforms").style.display = "block";
 }
 
-/* 🌫️ SUBTLE DUST */
+/* 🌫️ DUST (MORE PARTICLES, STILL SUBTLE) */
 const canvas = document.getElementById("dust");
 const ctx = canvas.getContext("2d");
 let w, h, particles = [];
@@ -272,14 +266,14 @@ function resize() {
 window.addEventListener("resize", resize);
 resize();
 
-for (let i = 0; i < 120; i++) {
+for (let i = 0; i < 260; i++) {
   particles.push({
     x: Math.random() * w,
     y: Math.random() * h,
-    r: Math.random() * 1.5,
-    dx: (Math.random() - 0.5) * 0.2,
-    dy: Math.random() * 0.3,
-    a: Math.random() * 0.08
+    r: Math.random() * 1.6,
+    dx: (Math.random() - 0.5) * 0.25,
+    dy: Math.random() * 0.35,
+    a: Math.random() * 0.06
   });
 }
 
