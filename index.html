@@ -20,6 +20,7 @@
       color: white;
       overflow-x: hidden;
       transition: background 1.5s ease;
+      position: relative;
     }
 
     body.active {
@@ -32,6 +33,14 @@
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
+    }
+
+    /* 🌫️ DUST CANVAS */
+    #dust {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
     }
 
     /* CLICK TO CONTINUE */
@@ -64,6 +73,8 @@
       opacity: 0;
       animation: fadeIn 1.2s ease forwards;
       animation-delay: 0.6s;
+      position: relative;
+      z-index: 1;
     }
 
     @keyframes fadeIn {
@@ -116,6 +127,24 @@
       line-height: 1.55;
     }
 
+    /* 👥 FRIENDS SECTION */
+    .section-title {
+      text-align: left;
+      font-weight: bold;
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+    }
+
+    .friends-box {
+      background: black;
+      border-radius: 16px;
+      padding: 14px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 18px;
+      text-align: left;
+    }
+
     .links a {
       display: block;
       background: black;
@@ -128,20 +157,12 @@
       font-size: 1.05rem;
     }
 
-    #player {
-      display: none;
-    }
+    #player { display: none; }
 
     /* 📱 EXTRA MOBILE BOOST */
     @media (max-width: 480px) {
-      h1 {
-        font-size: 2rem;
-      }
-
-      .bio-card {
-        font-size: 1rem;
-      }
-
+      h1 { font-size: 2rem; }
+      .bio-card { font-size: 1rem; }
       .gate button {
         font-size: 1.5rem;
         padding: 20px 36px;
@@ -152,99 +173,133 @@
 
 <body>
 
-  <!-- CLICK TO CONTINUE -->
-  <div class="gate" id="gate">
-    <button onclick="enterSite()">Click to Continue</button>
+<canvas id="dust"></canvas>
+
+<!-- CLICK TO CONTINUE -->
+<div class="gate" id="gate">
+  <button onclick="enterSite()">Click to Continue</button>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="content" id="content">
+  <h1>My Bio</h1>
+
+  <img
+    src="https://image2url.com/r2/default/images/1770415461533-ca0a5f3d-b3d7-4693-83f1-18717e6edbff.png"
+    class="song-img"
+    onclick="showSongContinue()"
+  >
+
+  <div class="song-continue" id="songContinue">
+    <button onclick="showPlatforms()">Click To Continue</button>
   </div>
 
-  <!-- MAIN CONTENT -->
-  <div class="content" id="content">
-    <h1>My Bio</h1>
-
-    <!-- SONG IMAGE -->
-    <img
-      src="https://image2url.com/r2/default/images/1770415461533-ca0a5f3d-b3d7-4693-83f1-18717e6edbff.png"
-      alt="Favorite Song"
-      class="song-img"
-      onclick="showSongContinue()"
-    >
-
-    <!-- SONG CONTINUE -->
-    <div class="song-continue" id="songContinue">
-      <button onclick="showPlatforms()">Click To Continue</button>
-    </div>
-
-    <!-- PLATFORM SELECT -->
-    <div class="platforms" id="platforms">
-      <strong>What Platform Would You Like To Hear This From?</strong>
-      <a href="https://open.spotify.com/track/6QHLeCJzFSENsGjkuYMCV7?si=12d21dc5056a4ba6&nd=1&dlsi=a8ac87d81b834d4e" target="_blank">🎧 Spotify</a>
-      <a href="https://youtu.be/LwIvSZ4DT4E?si=e3gOlTrXfAXD8EKa" target="_blank">▶ YouTube</a>
-    </div>
-
-    <div class="bio-card">
-      <strong>Hello!</strong><br><br>
-      ~ I’m Desk Or Desky Wesky And I Own A Game Called LuckyTag.
-      I Also Own Canopy Vr!! Now I Do Wanna Say That I Am A Developer
-      But Not For Free. Meaning I Won’t Help People Unless They Are
-      My Friends. And I Am A Apk Method Veteran: 3 Years Of Apk Method
-    </div>
-
-    <div class="links">
-      <a href="https://discord.gg/luckytag" target="_blank">🎮 Game Discord</a>
-      <a href="https://www.tiktok.com/@_.desk?_r=1&_t=ZT-93hpHSoRmmc" target="_blank">🎵 TikTok</a>
-      <a href="https://www.meta.com/experiences/app/9787130994744207/?utm_source=oculus&utm_medium=share&hwsh=VBYXgA8hb3" target="_blank">⬇ Download</a>
-    </div>
+  <div class="platforms" id="platforms">
+    <strong>What Platform Would You Like To Hear This From?</strong>
+    <a href="https://open.spotify.com/track/6QHLeCJzFSENsGjkuYMCV7" target="_blank">Click Here To Listen On Spotify</a>
+    <a href="https://youtu.be/LwIvSZ4DT4E" target="_blank">Click Here To Listen On YouTube</a>
   </div>
 
-  <!-- YOUTUBE PLAYER -->
-  <div id="player"></div>
-  <script src="https://www.youtube.com/iframe_api"></script>
+  <div class="bio-card">
+    <strong>Hello!</strong><br><br>
+    ~ I’m Desk Or Desky Wesky And I Own A Game Called LuckyTag.
+    I Also Own Canopy Vr!! Now I Do Wanna Say That I Am A Developer
+    But Not For Free. Meaning I Won’t Help People Unless They Are
+    My Friends. And I Am A Apk Method Veteran: 3 Years Of Apk Method
+  </div>
 
-  <script>
-    let player;
-    let volume = 0;
+  <!-- 👥 FRIENDS -->
+  <div class="section-title">friends</div>
+  <div class="friends-box">
+    L1rson, Dre1mer, G4, Spool.
+  </div>
 
-    function onYouTubeIframeAPIReady() {
-      player = new YT.Player('player', {
-        videoId: 'LwIvSZ4DT4E',
-        playerVars: {
-          autoplay: 0,
-          loop: 1,
-          playlist: 'LwIvSZ4DT4E',
-          controls: 0
-        },
-        events: {
-          onReady: () => player.setVolume(0)
-        }
-      });
-    }
+  <div class="links">
+    <a href="https://discord.gg/luckytag" target="_blank">🎮 Game Discord</a>
+    <a href="https://www.tiktok.com/@_.desk" target="_blank">🎵 TikTok</a>
+    <a href="https://www.meta.com/experiences/app/9787130994744207" target="_blank">⬇ Download</a>
+  </div>
+</div>
 
-    function fadeInMusic() {
-      const fade = setInterval(() => {
-        if (volume >= 50) clearInterval(fade);
-        else player.setVolume(++volume);
-      }, 80);
-    }
+<div id="player"></div>
+<script src="https://www.youtube.com/iframe_api"></script>
 
-    function enterSite() {
-      document.body.classList.add("active");
-      document.getElementById("gate").style.display = "none";
+<script>
+let player, volume = 0;
 
-      setTimeout(() => {
-        document.getElementById("content").style.display = "block";
-        player.playVideo();
-        fadeInMusic();
-      }, 600);
-    }
+/* 🎵 MUSIC */
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('player', {
+    videoId: 'LwIvSZ4DT4E',
+    playerVars: { autoplay: 0, loop: 1, playlist: 'LwIvSZ4DT4E', controls: 0 },
+    events: { onReady: () => player.setVolume(0) }
+  });
+}
 
-    function showSongContinue() {
-      document.getElementById("songContinue").style.display = "block";
-    }
+function fadeInMusic() {
+  const fade = setInterval(() => {
+    if (volume >= 50) clearInterval(fade);
+    else player.setVolume(++volume);
+  }, 80);
+}
 
-    function showPlatforms() {
-      document.getElementById("platforms").style.display = "block";
-    }
-  </script>
+function enterSite() {
+  document.body.classList.add("active");
+  document.getElementById("gate").style.display = "none";
+  setTimeout(() => {
+    document.getElementById("content").style.display = "block";
+    player.playVideo();
+    fadeInMusic();
+  }, 600);
+}
+
+function showSongContinue() {
+  document.getElementById("songContinue").style.display = "block";
+}
+function showPlatforms() {
+  document.getElementById("platforms").style.display = "block";
+}
+
+/* 🌫️ SUBTLE DUST */
+const canvas = document.getElementById("dust");
+const ctx = canvas.getContext("2d");
+let w, h, particles = [];
+
+function resize() {
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+}
+window.addEventListener("resize", resize);
+resize();
+
+for (let i = 0; i < 120; i++) {
+  particles.push({
+    x: Math.random() * w,
+    y: Math.random() * h,
+    r: Math.random() * 1.5,
+    dx: (Math.random() - 0.5) * 0.2,
+    dy: Math.random() * 0.3,
+    a: Math.random() * 0.08
+  });
+}
+
+function drawDust() {
+  ctx.clearRect(0, 0, w, h);
+  particles.forEach(p => {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255,255,255,${p.a})`;
+    ctx.fill();
+    p.x += p.dx;
+    p.y += p.dy;
+    if (p.y > h) p.y = 0;
+    if (p.x < 0) p.x = w;
+    if (p.x > w) p.x = 0;
+  });
+  requestAnimationFrame(drawDust);
+}
+drawDust();
+</script>
 
 </body>
 </html>
