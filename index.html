@@ -227,8 +227,20 @@ let player, volume = 0;
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('player', {
     videoId: 'LwIvSZ4DT4E',
-    playerVars: { autoplay: 0, loop: 1, playlist: 'LwIvSZ4DT4E', controls: 0 },
-    events: { onReady: () => player.setVolume(0) }
+    playerVars: {
+      autoplay: 0,
+      loop: 1,
+      playlist: 'LwIvSZ4DT4E',
+      controls: 0,
+      mute: 1,          // 🔥 mobile-safe
+      playsinline: 1
+    },
+    events: {
+      onReady: () => {
+        player.mute();       // mute first
+        player.setVolume(0); // start at 0 volume
+      }
+    }
   });
 }
 
@@ -242,9 +254,11 @@ function fadeInMusic() {
 function enterSite() {
   document.body.classList.add("active");
   document.getElementById("gate").style.display = "none";
+
   setTimeout(() => {
     document.getElementById("content").style.display = "block";
     player.playVideo();
+    player.unMute();
     fadeInMusic();
   }, 600);
 }
@@ -256,7 +270,7 @@ function showPlatforms() {
   document.getElementById("platforms").style.display = "block";
 }
 
-/* 🌫️ DUST (MORE PARTICLES, STILL SUBTLE) */
+/* 🌫️ DUST ANIMATION */
 const canvas = document.getElementById("dust");
 const ctx = canvas.getContext("2d");
 let w, h, particles = [];
